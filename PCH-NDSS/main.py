@@ -22,7 +22,7 @@ group = None
 
 
 def Setup(N):
-    pairing_group = PairingGroup('MNT224')
+    pairing_group = PairingGroup('BN254')
 
     # AC17 CP-ABE under DLIN (2-linear)
     cpabe = AC17CPABE(pairing_group, 2)
@@ -101,7 +101,6 @@ def Hash(cpabe,pk,ct_msg, h_msg, policy_str,key, rsaKey, sig_params):
     # ABE encryption
     ctxt = cpabe.encrypt(pk, int.from_bytes(K, byteorder='big'), randomness, policy_str)
 
-
     return ctxt, hPrime, rPrime, etd_rsaKey, aes_data, iv
 
 
@@ -173,7 +172,7 @@ def main():
     
     d = 10
     trial = 100
-    Test_Setup = True
+    Test_Setup = False
     Test_KeyGen = False
     Test_Hash = False
     Test_Adapt = False
@@ -184,13 +183,7 @@ def main():
     h_msg = b"0123456789"
     h_msgPrime = b"abcdefg"
 
-    # instantiate a bilinear pairing map
-    #pairing_group = PairingGroup('MNT224')
-    
-    # AC17 CP-ABE under DLIN (2-linear)
-    #pchba = PCHBA(pairing_group, 2, 10)    # k = 10 (depth of the tree)
 
-    # run the set up
     (cpabe,pk,msk, pairing_group, attr_list, sig_params) =Setup(d)
 
     

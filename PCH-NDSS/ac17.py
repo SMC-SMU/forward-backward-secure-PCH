@@ -241,12 +241,14 @@ class AC17CPABE(ABEnc):
 
         Cpp = ctxt['Cp']
         K = prod2_GT/prod1_GT
+        
+        K = -K
 
         seed = str(K)
         seed = seed[:Tlen]
-
 
         K1 = self.group.hash(seed + str(00), ZR)
         M = (Cpp[0] - K1)
 
         return M
+
